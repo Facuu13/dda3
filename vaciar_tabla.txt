@@ -1,0 +1,36 @@
+-- Conectar a MySQL
+mysql -u facuu13 -p
+
+-- Seleccionar la base de datos
+USE sensor_data;
+
+-- Verificar los registros a eliminar
+SELECT * FROM readings WHERE temperature IS NULL OR humidity IS NULL;
+
+-- Eliminar los registros seleccionados
+DELETE FROM readings WHERE temperature IS NULL OR humidity IS NULL;
+
+-- Verificar que los registros se han eliminado
+SELECT * FROM readings;
+
+
+-- Vaciar la tabla
+TRUNCATE TABLE readings;
+
+
+sudo mysql -u root -p
+
+CREATE DATABASE sensor_data;
+CREATE USER 'tu_usuario_mysql'@'localhost' IDENTIFIED BY 'tu_contraseña_mysql';
+GRANT ALL PRIVILEGES ON sensor_data.* TO 'tu_usuario_mysql'@'localhost';
+FLUSH PRIVILEGES;
+
+USE sensor_data;
+
+CREATE TABLE readings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sensor_id VARCHAR(50),
+    temperature FLOAT,
+    humidity FLOAT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
