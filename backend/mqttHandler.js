@@ -1,20 +1,5 @@
 const mqtt = require('mqtt');
-const mysql = require('mysql2');
-
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'facuu13',
-    password: 'talleres13',
-    database: 'sensor_data'
-});
-
-db.connect(err => {
-    if (err) {
-        console.error('Error al conectar a MySQL:', err);
-    } else {
-        console.log('Conectado a MySQL');
-    }
-});
+const db = require('./db'); // Importar la conexión a MySQL
 
 const brokerUrl = 'mqtt://localhost:1883';
 const options = {
