@@ -38,5 +38,19 @@ router.get('/mediciones/humedades', (req, res) => {
     });
 });
 
+// Agregar una nueva ruta para obtener los IDs de los dispositivos
+router.get('/dispositivos', (req, res) => {
+    const query = 'SELECT DISTINCT sensor_id FROM mediciones';
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener los IDs de los dispositivos:', err);
+            res.status(500).send('Error al obtener los IDs de los dispositivos');
+        } else {
+            const dispositivos = results.map(result => result.sensor_id);
+            res.json(dispositivos);
+        }
+    });
+});
+
 module.exports = router;
 
