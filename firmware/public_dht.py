@@ -9,8 +9,8 @@ import ujson
 d = dht.DHT11(machine.Pin(32))
 
 # Configuración de la red WiFi
-ssid = "quepasapatejode"
-password = "losvilla08"
+ssid = "GP Fiber P1"
+password = "GPpisouno"
 
 # Conexión a la red WiFi
 def conectar_wifi(ssid, password):
@@ -24,8 +24,8 @@ def conectar_wifi(ssid, password):
     return s
 
 # Configuración del cliente MQTT
-cliente_id = 'dispositivo1'
-mqtt_broker = '192.168.1.12'
+cliente_id = 'dispositivo2'
+mqtt_broker = 'facu-ThinkPad-E14.local'
 puerto = 1883
 usuario_mqtt = 'facuu'
 contrasena_mqtt = 'talleres13'
