@@ -52,5 +52,18 @@ router.get('/dispositivos', (req, res) => {
     });
 });
 
+router.get('/mediciones/:dispositivoId', (req, res) => {
+    const dispositivoId = req.params.dispositivoId;
+    const query = 'SELECT * FROM mediciones WHERE sensor_id = ?';
+    db.query(query, [dispositivoId], (err, results) => {
+        if (err) {
+            console.error('Error al obtener las mediciones:', err);
+            res.status(500).send('Error al obtener las mediciones');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
 module.exports = router;
 
