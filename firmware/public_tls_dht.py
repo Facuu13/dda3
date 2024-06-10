@@ -129,3 +129,4 @@ while True:
     cliente.check_msg()
     time.sleep(15)
 
+#mosquitto_pub -h 192.168.1.11 -p 1883 -u facuu -P talleres13 -t casaFacu/led -m "off"
