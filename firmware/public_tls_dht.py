@@ -30,6 +30,7 @@ puerto = 8883  # Puerto para TLS
 usuario_mqtt = 'facuu'
 contrasena_mqtt = 'talleres13'
 
+# Lectura de certificados
 with open('ca.crt', 'rb') as f:
     ca_cert = f.read()
 with open('client.crt', 'rb') as f:
