@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import mqtt  from 'mqtt';
 
+
+
 const NodeInfo = () => {
     const [dispositivos, setDispositivos] = useState([]);
     const [mediciones, setMediciones] = useState({});
@@ -116,7 +118,7 @@ const NodeInfo = () => {
                             <p>Ubicacion: {mediciones[dispositivo].ubicacion}</p>
                             <p>Modelo: {mediciones[dispositivo].modelo}</p>
                             <button onClick={() => toggleRELE(mediciones[dispositivo].rele == '1' ? 'off' : 'on')}>
-                                {mediciones[dispositivo].rele == '1' ?  'Apagar LED' : 'Encender LED'}
+                                {mediciones[dispositivo].rele == '1' ?  'Apagar Rele' : 'Encender Rele'}
                             </button>
                         </div>
                     )}
