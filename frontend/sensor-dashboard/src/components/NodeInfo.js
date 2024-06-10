@@ -82,6 +82,7 @@ const NodeInfo = () => {
 
     const toggleRELE = (action) => {
         if (mqttClient) {
+            console.log(action);
             const message = mqttClient.publish('casaFacu/led', action);
             if (!message) {
                 console.error('Failed to publish MQTT message');
@@ -114,8 +115,9 @@ const NodeInfo = () => {
                             <p>Rele: {mediciones[dispositivo].rele}</p>
                             <p>Ubicacion: {mediciones[dispositivo].ubicacion}</p>
                             <p>Modelo: {mediciones[dispositivo].modelo}</p>
-                            <button onClick={() => toggleRELE('on')}>Encender RELE</button>
-                            <button onClick={() => toggleRELE('off')}>Apagar RELE</button>
+                            <button onClick={() => toggleRELE(mediciones[dispositivo].rele == '1' ? 'off' : 'on')}>
+                                {mediciones[dispositivo].rele == '1' ?  'Apagar LED' : 'Encender LED'}
+                            </button>
                         </div>
                     )}
                     {selectedDevice === dispositivo && mediciones[dispositivo] === null && (
