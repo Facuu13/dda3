@@ -7,6 +7,8 @@ import ujson
 
 # Pin de datos del sensor
 d = dht.DHT11(machine.Pin(32))
+# Pin del LED
+pin_led = machine.Pin(2, machine.Pin.OUT)
 
 # Configuración de la red WiFi
 ssid = "quepasapatejode"
@@ -80,6 +82,32 @@ def publicar_datos(cliente, tema_temp, tema_hum):
         except Exception as e:
             print(f"Error al reconectar al broker MQTT: {e}")
 
+# Función para manejar los mensajes entrantes
+def manejar_mensaje(topic, msg):
+    print("Mensaje recibido en el tema:", topic)
+    print("Contenido del mensaje:", msg.decode())
+
+    # Chequear si el mensaje es 'on' o 'off' y actuar en consecuencia
+    if msg == b'on':
+        print("Encendiendo LED")
+        pin_led.on()
+    elif msg == b'off':
+        print("Apagando LED")
+        pin_led.off()
+    else:
+        print("Mensaje no reconocido")
+
+# Suscribirse a un tema para recibir mensajes
+def suscribir_temas(cliente, topic):
+    try:
+        cliente.set_callback(manejar_mensaje)
+        cliente.subscribe(topic)
+        print("Suscripción exitosa al tema:", topic)
+    except Exception as e:
+        print(f"Error al suscribirse al tema: {e}")
+        
+
+
 # Conectar a WiFi
 s = conectar_wifi(ssid, password)
 
@@ -89,9 +117,15 @@ cliente = conectar_mqtt(cliente_id, mqtt_broker, puerto, usuario_mqtt, contrasen
 # Configuración de topics para la temperatura y humedad
 tema_temp = b'casaFacu/temp'
 tema_hum = b'casaFacu/hum'
+tema_led = b'casaFacu/led'
+
+# Suscribirse al tema para recibir mensajes de control del LED
+suscribir_temas(cliente, tema_led)
 
 # Bucle principal
 while True:
     publicar_datos(cliente, tema_temp, tema_hum)
+    # Chequear mensajes entrantes
+    cliente.check_msg()
     time.sleep(15)
 
