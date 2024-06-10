@@ -5,17 +5,17 @@ mysql -u facuu13 -p
 USE sensor_data;
 
 -- Verificar los registros a eliminar
-SELECT * FROM readings WHERE temperature IS NULL OR humidity IS NULL;
+SELECT * FROM mediciones WHERE temperature IS NULL OR humidity IS NULL;
 
 -- Eliminar los registros seleccionados
-DELETE FROM readings WHERE temperature IS NULL OR humidity IS NULL;
+DELETE FROM mediciones WHERE temperature IS NULL OR humidity IS NULL;
 
 -- Verificar que los registros se han eliminado
-SELECT * FROM readings;
+SELECT * FROM mediciones;
 
 
 -- Vaciar la tabla
-TRUNCATE TABLE readings;
+TRUNCATE TABLE mediciones;
 
 
 sudo mysql -u root -p
@@ -27,10 +27,12 @@ FLUSH PRIVILEGES;
 
 USE sensor_data;
 
-CREATE TABLE readings (
+CREATE TABLE mediciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sensor_id VARCHAR(50),
     temperature FLOAT,
     humidity FLOAT,
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    topic VARCHAR(255),
+    led BOOLEAN
 );
