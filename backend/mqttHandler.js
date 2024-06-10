@@ -11,6 +11,7 @@ const client = mqtt.connect(brokerUrl, options);
 client.on('connect', () => {
     console.log('Conectado al broker MQTT');
     const topics = ['casaFacu/pieza']; // Cambiado el topic a uno solo
+    //const topics = ['casaFacu/pieza', 'casaFacu/cocina', 'casaFacu/baño']; // Nuevos topics agregados
     client.subscribe(topics, (err) => {
         if (err) {
             console.error('Error al suscribirse al tópico', err);
