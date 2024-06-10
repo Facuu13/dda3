@@ -1,10 +1,19 @@
 const mqtt = require('mqtt');
-const db = require('./db'); // Importar la conexión a MySQL
+const fs = require('fs');
+const db = require('./db'); 
 
-const brokerUrl = 'mqtt://localhost:1883';
+const brokerUrl = 'mqtts://192.168.1.11:8883'; 
+const caFilePath = '/home/facu/mosquitto_certs/ca.crt'; 
+const certFilePath = '/home/facu/mosquitto_certs/client.crt'; 
+const keyFilePath = '/home/facu/mosquitto_certs/client.key'; 
+
 const options = {
     username: 'facuu',
-    password: 'talleres13'
+    password: 'talleres13',
+    ca: fs.readFileSync(caFilePath),
+    cert: fs.readFileSync(certFilePath),
+    key: fs.readFileSync(keyFilePath),
+    rejectUnauthorized: false,
 };
 
 const topics = ['casaFacu/pieza', 'casaFacu/cocina'];
