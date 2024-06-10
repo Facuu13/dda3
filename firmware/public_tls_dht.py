@@ -4,7 +4,6 @@ import network
 import dht
 import machine
 import ujson
-import ussl
 
 # Pin de datos del sensor
 d = dht.DHT11(machine.Pin(32))
