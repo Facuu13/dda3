@@ -5,15 +5,20 @@ const NodeInfo = () => {
     const [dispositivos, setDispositivos] = useState([]);
     const [mediciones, setMediciones] = useState({});
     const [selectedDevice, setSelectedDevice] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         axios.get('/api/dispositivos')
             .then(response => {
                 const dispositivos = response.data;
                 setDispositivos(dispositivos);
+                setLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching devices:', error);
+                setError('Error fetching devices. Please try again later.');
+                setLoading(false);
             });
     }, []);
 
@@ -37,17 +42,27 @@ const NodeInfo = () => {
                 })
                 .catch(error => {
                     console.error(`Error fetching measurements for device ${selectedDevice}:`, error);
+                    setError(`Error fetching measurements for device ${selectedDevice}. Please try again later.`);
                 });
         }
     }, [selectedDevice]);
 
-    if (dispositivos.length === 0) {
+    const handleDeviceClick = (dispositivo) => {
+        if (dispositivo === selectedDevice) {
+            setSelectedDevice(null); // Cerrar el dispositivo si se hace clic en él de nuevo
+        } else {
+            setSelectedDevice(dispositivo);
+            setError(null); // Resetear el estado de error
+        }
+    };
+
+    if (loading) {
         return <div>Loading...</div>;
     }
 
-    const handleDeviceClick = (dispositivo) => {
-        setSelectedDevice(dispositivo);
-    };
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div>
@@ -75,4 +90,3 @@ const NodeInfo = () => {
 };
 
 export default NodeInfo;
-
