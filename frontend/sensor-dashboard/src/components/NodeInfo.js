@@ -8,13 +8,29 @@ const NodeInfo = () => {
     const [selectedDevice, setSelectedDevice] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [mqttClient, setMqttClient] = useState(null);
 
     const brokerUrl = 'mqtt://192.168.1.11:8080';
-    const options = {
-    username: 'facuu',
-    password: 'talleres13'
+    const mqttOptions = {
+        username: 'facuu',
+        password: 'talleres13'
     };
-    const client = mqtt.connect(brokerUrl, options);
+
+
+    useEffect(() => {
+        const client = mqtt.connect(brokerUrl, mqttOptions);
+        setMqttClient(client);
+
+        client.on('connect', () => {
+            console.log('MQTT connected');
+        });
+
+        return () => {
+            if (client) {
+                client.end();
+            }
+        };
+    }, []);
 
     useEffect(() => {
         axios.get('/api/dispositivos')
@@ -64,6 +80,17 @@ const NodeInfo = () => {
         }
     };
 
+    const toggleLed = (action) => {
+        if (mqttClient) {
+            const message = mqttClient.publish('casaFacu/led', action);
+            if (!message) {
+                console.error('Failed to publish MQTT message');
+            }
+        } else {
+            console.error('MQTT client not connected');
+        }
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -97,6 +124,8 @@ const NodeInfo = () => {
                     <hr />
                 </div>
             ))}
+            <button onClick={() => toggleLed('on')}>Encender LED</button>
+            <button onClick={() => toggleLed('off')}>Apagar LED</button>
         </div>
     );
 };
