@@ -90,12 +90,19 @@ def publicar_datos(cliente, tema_pieza):
         temperatura = d.temperature()
         humedad = d.humidity()
 
-        payload = ujson.dumps({"id": cliente_id, "temperatura": temperatura, "humedad": humedad})
+        payload = ujson.dumps({
+            "id": cliente_id, 
+            "temperatura": temperatura, 
+            "humedad": humedad, 
+            "topic": tema_pieza, 
+            "estado_led": pin_led.value()})
 
         cliente.publish(tema_pieza, payload)
 
         print(f"Temperatura: {temperatura}°C")
         print(f"Humedad: {humedad}%")
+        print(f"Topic: {tema_pieza}")
+        print(f"Estado del led: {pin_led.value()}")
     except Exception as e:
         print(f"Error al medir o publicar datos: {e}")
         try:
