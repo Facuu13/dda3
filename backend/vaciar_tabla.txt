@@ -39,10 +39,3 @@ CREATE TABLE mediciones (
     modelo VARCHAR(255)
 );
 
-CREATE TABLE nodos_sensores (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    sensor_id VARCHAR(50) NOT NULL UNIQUE,
-    modelo_sensor VARCHAR(255),
-    ubicacion VARCHAR(255),
-    topic VARCHAR(255)
-);
