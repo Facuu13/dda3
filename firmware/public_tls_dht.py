@@ -10,7 +10,7 @@ d = dht.DHT11(machine.Pin(32))
 # Pin del LED
 pin_led = machine.Pin(2, machine.Pin.OUT)
 
-ubicacion = 'pieza'
+ubicacion = 'cocina'
 modelo = 'dht11'
 
 # Configuración de la red WiFi
@@ -29,7 +29,7 @@ def conectar_wifi(ssid, password):
     return s
 
 # Configuración del cliente MQTT
-cliente_id = 'dispositivo1'
+cliente_id = 'dispositivo3'
 mqtt_broker = '192.168.1.11'
 puerto = 8883  # Puerto para TLS
 usuario_mqtt = 'facuu'
@@ -126,7 +126,7 @@ cliente = conectar_mqtt(cliente_id, mqtt_broker, puerto, usuario_mqtt, contrasen
 
 # Configuración de topics para la temperatura y humedad
 tema_led = b'casaFacu/led'
-tema_pieza = b'casaFacu/pieza'
+tema_pieza = b'casaFacu/cocina'
 
 # Suscribirse al tema para recibir mensajes de control del LED
 suscribir_temas(cliente, tema_led)

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import mqtt  from 'mqtt';
 
 const NodeInfo = () => {
     const [dispositivos, setDispositivos] = useState([]);
@@ -7,6 +8,13 @@ const NodeInfo = () => {
     const [selectedDevice, setSelectedDevice] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const brokerUrl = 'mqtt://192.168.1.11:8080';
+    const options = {
+    username: 'facuu',
+    password: 'talleres13'
+    };
+    const client = mqtt.connect(brokerUrl, options);
 
     useEffect(() => {
         axios.get('/api/dispositivos')
