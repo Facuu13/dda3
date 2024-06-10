@@ -75,6 +75,8 @@ const NodeInfo = () => {
                             <p>Última Temperatura: {mediciones[dispositivo].temperature}°C</p>
                             <p>Última Humedad: {mediciones[dispositivo].humidity}%</p>
                             <p>Última Medición: {new Date(mediciones[dispositivo].timestamp).toLocaleString()}</p>
+                            <p>Topic: {mediciones[dispositivo].topic}</p>
+                            <p>Led: {mediciones[dispositivo].led}</p>
                         </div>
                     )}
                     {selectedDevice === dispositivo && mediciones[dispositivo] === null && (
