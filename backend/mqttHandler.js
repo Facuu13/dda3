@@ -24,14 +24,14 @@ client.on('connect', () => {
 client.on('message', (topic, message) => {
     try {
         const data = JSON.parse(message.toString());
-        const { id, temperatura, humedad, topic: mensajeTopic, estado_led } = data;
+        const { id, temperatura, humedad, topic: mensajeTopic, estado_led, ubicacion, modelo } = data;
 
-        const query = 'INSERT INTO mediciones (sensor_id, temperature, humidity, topic, led) VALUES (?, ?, ?, ?, ?)';
-        db.query(query, [id, temperatura, humedad, mensajeTopic, estado_led], (err, result) => {
+        const query = 'INSERT INTO mediciones (sensor_id, temperature, humidity, topic, rele, ubicacion, modelo) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        db.query(query, [id, temperatura, humedad, mensajeTopic, estado_led,ubicacion, modelo], (err, result) => {
             if (err) {
                 console.error('Error al insertar datos:', err);
             } else {
-                console.log(`Datos guardados: ID: ${id}, Temperatura: ${temperatura}, Humedad: ${humedad}, Topic: ${mensajeTopic}, Estado LED: ${estado_led}`);
+                console.log(`Datos guardados: ID: ${id}, Temperatura: ${temperatura}, Humedad: ${humedad}, Topic: ${mensajeTopic}, Estado LED: ${estado_led}, Ubicacion: ${ubicacion}, Modelo: ${modelo} `);
             }
         });
     } catch (error) {

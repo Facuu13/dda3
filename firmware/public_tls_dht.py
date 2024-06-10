@@ -10,6 +10,9 @@ d = dht.DHT11(machine.Pin(32))
 # Pin del LED
 pin_led = machine.Pin(2, machine.Pin.OUT)
 
+ubicacion = 'pieza'
+modelo = 'dht11'
+
 # Configuración de la red WiFi
 ssid = "quepasapatejode"
 password = "losvilla08"
@@ -95,7 +98,9 @@ def publicar_datos(cliente, tema_pieza):
             "temperatura": temperatura, 
             "humedad": humedad, 
             "topic": tema_pieza, 
-            "estado_led": pin_led.value()})
+            "estado_led": pin_led.value(),
+            "ubicacion": ubicacion,
+            "modelo": modelo})
 
         cliente.publish(tema_pieza, payload)
 
@@ -103,6 +108,8 @@ def publicar_datos(cliente, tema_pieza):
         print(f"Humedad: {humedad}%")
         print(f"Topic: {tema_pieza}")
         print(f"Estado del led: {pin_led.value()}")
+        print(f"Ubicacion: {ubicacion}")
+        print(f"Modelo: {modelo}")
     except Exception as e:
         print(f"Error al medir o publicar datos: {e}")
         try:
