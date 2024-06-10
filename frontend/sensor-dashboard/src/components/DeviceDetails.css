@@ -1,0 +1,34 @@
+.device-details {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.device-details-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.device-details-list li {
+    margin-bottom: 8px; /* Añadimos espacio entre los elementos de la lista */
+}
+
+.rele-button {
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px; /* Aumentamos el tamaño de la letra del botón */
+    margin-top: 10px; /* Añadimos un poco de espacio encima del botón */
+}
+
+.rele-button.on {
+    background-color: #28a745;
+}
+
+.rele-button.off {
+    background-color: #dc3545;
+}

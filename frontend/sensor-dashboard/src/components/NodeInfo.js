@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import mqtt  from 'mqtt';
-
-
+import mqtt from 'mqtt';
+import DeviceDetails from './DeviceDetails';  // Importamos el nuevo componente
 
 const NodeInfo = () => {
     const [dispositivos, setDispositivos] = useState([]);
@@ -17,7 +16,6 @@ const NodeInfo = () => {
         username: 'facuu',
         password: 'talleres13'
     };
-
 
     useEffect(() => {
         const client = mqtt.connect(brokerUrl, mqttOptions);
@@ -108,24 +106,12 @@ const NodeInfo = () => {
             {dispositivos.map((dispositivo, index) => (
                 <div key={index}>
                     <h3 onClick={() => handleDeviceClick(dispositivo)}>ID del Nodo: {dispositivo}</h3>
-                    {selectedDevice === dispositivo && mediciones[dispositivo] && (
-                        <div>
-                            <p>Última Temperatura: {mediciones[dispositivo].temperature}°C</p>
-                            <p>Última Humedad: {mediciones[dispositivo].humidity}%</p>
-                            <p>Última Medición: {new Date(mediciones[dispositivo].timestamp).toLocaleString()}</p>
-                            <p>Topic: {mediciones[dispositivo].topic}</p>
-                            <p>Rele: {mediciones[dispositivo].rele}</p>
-                            <p>Ubicacion: {mediciones[dispositivo].ubicacion}</p>
-                            <p>Modelo: {mediciones[dispositivo].modelo}</p>
-                            <button onClick={() => toggleRELE(mediciones[dispositivo].rele == '1' ? 'off' : 'on')}>
-                                {mediciones[dispositivo].rele == '1' ?  'Apagar Rele' : 'Encender Rele'}
-                            </button>
-                        </div>
-                    )}
-                    {selectedDevice === dispositivo && mediciones[dispositivo] === null && (
-                        <div>
-                            <p>No hay mediciones para este dispositivo</p>
-                        </div>
+                    {selectedDevice === dispositivo && (
+                        <DeviceDetails
+                            dispositivo={dispositivo}
+                            mediciones={mediciones[dispositivo]}
+                            toggleRELE={toggleRELE}
+                        />
                     )}
                     <hr />
                 </div>
@@ -135,3 +121,4 @@ const NodeInfo = () => {
 };
 
 export default NodeInfo;
+
