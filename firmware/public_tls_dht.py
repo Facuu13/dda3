@@ -29,7 +29,7 @@ def conectar_wifi(ssid, password):
     return s
 
 # Configuración del cliente MQTT
-cliente_id = 'dispositivo2'
+cliente_id = 'dispositivo1'
 mqtt_broker = '192.168.1.11'
 puerto = 8883  # Puerto para TLS
 usuario_mqtt = 'facuu'
