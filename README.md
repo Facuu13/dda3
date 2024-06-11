@@ -1,4 +1,5 @@
 # Trabajo Pratico 
+![Logo del Proyecto](presentacion.png)
 
 ## Firmware
 
@@ -34,8 +35,7 @@ Utilizamos Node.js y Express para el desarrollo del backend, y también nos cone
 - **Mosquitto**
 - **MySQL**
 
-
-
+En el archivo mqttHandler.js esta la conexion del backend al broker de mosquitto a traves de TLS
 
 ## Frontend
 
