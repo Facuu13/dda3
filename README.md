@@ -45,6 +45,8 @@ Use MySQL server y cree esta en local, hay un archivo llamado crear_tabla_mysql.
 
 El frontend de este proyecto fue desarrollado utilizando React.
 
+El archivo principal, `Nodeinfo.js`, ubicado en `/frontend/src/components`, contiene la mayor parte de la funcionalidad del frontend. Este archivo maneja la conexión con el broker Mosquitto, permitiendo la publicación de mensajes al presionar un botón designado. Además, define la interfaz de usuario.
+
 ### Tecnologías Utilizadas
 
 - **React**
