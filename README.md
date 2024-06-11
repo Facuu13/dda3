@@ -36,10 +36,10 @@ Utilizamos Node.js y Express para el desarrollo del backend, y también nos cone
 - **MySQL**
 
 ### Conexión al Broker
-En el archivo mqttHandler.js esta la conexion del backend al broker de mosquitto a traves de TLS
+En el archivo `mqttHandler.js` esta la conexion del backend al broker de mosquitto a traves de TLS
 
 ### Base de datos
-Use MySQL server y cree esta en local, hay un archivo llamado crear_tabla_mysql.txt de como la cree a esta base de datos y la respetiva tabla
+Use MySQL server y cree esta en local, hay un archivo llamado `crear_tabla_mysql.txt` de como la cree a esta base de datos y la respetiva tabla
 
 ## Frontend
 
