@@ -35,6 +35,8 @@ Utilizamos Node.js y Express para el desarrollo del backend, y también nos cone
 - **MySQL**
 
 
+
+
 ## Frontend
 
 El frontend de este proyecto fue desarrollado utilizando React.
